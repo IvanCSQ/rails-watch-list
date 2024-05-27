@@ -1,0 +1,20 @@
+<div class="container">
+  <h1>i am list show page <%= @list.id %></h1>
+
+  <h3>
+    <%= @list.name %>
+  </h3>
+
+
+  <%#= @list.bookmarks %>
+
+  <% @list.bookmarks.each do |bookmark| %>
+    <h4><%= bookmark.movie.title %></h4>
+    <p><%= bookmark.movie.overview %></p>
+    <%= link_to "Delete", bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+  <% end %>
+
+  <%= link_to "add", new_list_bookmark_path(@list) %>
+
+  <%= link_to "Back", lists_path %>
+</div>

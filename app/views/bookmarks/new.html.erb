@@ -1,0 +1,12 @@
+<div class='container'>
+  <h1>bookmarks new page</h1>
+
+  <%= simple_form_for([@list, @bookmark]) do |f| %>
+    <%= f.error_notification message: f.object.errors.full_messages.to_sentence %>
+    <%= f.association :movie %>
+    <%#= f.association :list %>
+    <%= f.input :comment %>
+
+    <%= f.submit %>
+  <% end %>
+</div>
