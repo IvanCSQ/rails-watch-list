@@ -1,9 +1,27 @@
-<div class="container">
-  <h1>i am list index</h1>
 
-  <% @lists.each do |list| %>
-    <p>
-      <%= list.id %> | <%= link_to list.name, list_path(list) %>
-    </p>
-  <% end %>
+
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https: //images .;unsplash.com/photo-1535016120720-40c646be5580?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);">
+  <div class="container">
+    <h1>Save any kind of movies</h1>
+    <p>Classic</p>
+    <%# <a class="btn btn-flat" href="#">Apply now</a> %>
+  </div>
+</div>
+
+<div class='container'>
+  <div class='my-2 d-flex justify-content-between'>
+    <h3>My Lists</h3>
+    <%= link_to "Create a movie list", new_list_path, class: "btn btn-flat" %>
+  </div>
+
+  <div class='row'>
+    <% @lists.each do |list| %>
+      <div class='col-4 mb-1'>
+        <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://images.unsplash.com/photo-1587986100063-d1c34ca3dc6b?q=80&w=3174&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)">
+          <%= link_to list.name, list_path(list) %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
 </div>
