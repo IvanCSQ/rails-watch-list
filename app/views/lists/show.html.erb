@@ -1,37 +1,44 @@
-<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1587986100063-d1c34ca3dc6b?q=80&w=3174&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);">
+<div class="banner position-relative mb-1" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1587986100063-d1c34ca3dc6b?q=80&w=3174&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);">
   <div class="container">
     <h1><%= @list.name %></h1>
+  </div>
+
+  <div class="position-absolute top-0 end-0 m-1">
+    <a class="btn btn-primary" href="#" role="button">
+      <%= pluralize(@list.bookmarks.length, 'movie') %>
+    </a>
   </div>
 </div>
 
 <div class="container">
 
-  <div class="card" style="width: 18rem;">
-    <img src="..." class="card-img-top" alt="...">
-    <div class="card-body">
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    </div>
+  <div class='row'>
+    <% @list.bookmarks.each do |bookmark| %>
+      <div class='col-4 mb-1'>
+        <div class="card h-100">
+          <img src="https://images.unsplash.com/photo-1716348230181-3e9465ea1a9f?q=80&w=3058&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="...">
+          <div class="card-body">
+            <%# <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> %>
+            <h4><%= bookmark.movie.title %></h4>
+            <p><%= bookmark.movie.overview %></p>
+          </div>
+          <%= link_to "Delete", bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+        </div>
+      </div>
+    <% end %>
   </div>
 
-  <h1>i am list show page <%= @list.id %></h1>
 
-  <h3>
-    <%= @list %>
-  </h3>
+  <h1>i am list show page <%= @list.id %></h1>
 
 
   <%#= @list.bookmarks %>
 
-  <% @list.bookmarks.each do |bookmark| %>
-    <h4><%= bookmark.movie.title %></h4>
-    <p><%= bookmark.movie.overview %></p>
-    <%= link_to "Delete", bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
-  <% end %>
 
   <%= link_to "add", new_list_bookmark_path(@list) %>
 
   <%= link_to "Back", lists_path %>
+  <%= cl_image_tag @list.photo.key, height: 300, width: 400, crop: :fill if @list.photo.attached?%>
 </div>
 
-<%= cl_image_tag @list.photo.key, height: 300, width: 400, crop: :fill if @list.photo.attached?%>
 <%#= cl_image_tag(@list.photo.key, height: 300, width: 400, crop: :fill) if @list.photo.attached?%>
